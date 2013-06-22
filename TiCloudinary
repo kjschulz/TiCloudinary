@@ -1,0 +1,37 @@
+// replace these
+var cloudinaryCloudName = 'Your_Cloud_Name';
+var cloudinaryAPIKey    = 999999999999;
+var cloudinaryAPISecret = 'XXXXXXXXXX-XXXXX-XX';
+
+// call this function & pass in TiBlob Object
+function cloudImageClean(rawImage) {
+    var nowUnix = moment().unix();  // requires momentjs
+    var signature = Ti.Utils.sha1('timestamp=' + nowUnix + cloudinaryAPISecret);
+    
+    var url = 'http://api.cloudinary.com/v1_1/' + cloudinaryCloudName + '/image/upload';
+    var client = Ti.Network.createHTTPClient({
+        onload : function(e) {
+            Ti.API.info("Received Obj: " + this.responseText);
+            var response = JSON.parse(this.responseText);
+            var transparentImg= 'http://res.cloudinary.com/' + cloudinaryCloudName + '/image/upload/c_scale,e_make_transparent:30,r_40,w_447/' + response.public_id + '.png'; 
+            // Tadaaa! Do what you wish with the transparentImg
+        },
+        onerror : function(e) {
+            Ti.API.info(JSON.stringify(e));
+        },
+        timeout:4000  // in ms
+    });
+    client.setRequestHeader("enctype", "multipart/form-data");
+    client.setRequestHeader("Content-Type", "image/png");
+    client.open("POST", url);
+    
+    var params = {
+        api_key:cloudinaryAPIKey,
+        file: rawImage,
+        //public_id: someUniqueName, // if added, make sure the signature sha1 starts with:'public_id=' + someUniqueName + '&timestamp=...'
+        signature:signature,
+        timestamp:nowUnix,
+    };
+    client.send(params);
+
+};
