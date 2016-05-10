@@ -27,7 +27,7 @@ exports = {
    * @param transformParams {String} - List of supported query string parameters for performing
    * transforms on the image uploaded - read more on supported parameters at
    * http://cloudinary.com/documentation/image_transformations
-   * @param callback {Function} - Optional callback function, called with an argument object with the
+   * @param callback {Function} - Optional callback function, called containing an argument object with the
    * response `public_id` and transform url to call the Cloudinary API with to perform the transformation
    */
   uploadAndTransform: function(blob, transformParams, callback) {
