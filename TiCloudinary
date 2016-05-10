@@ -20,7 +20,16 @@ function alert(message, title, ok, callback) {
 }
 
 exports = {
-  // Upload image from a TiBlob object and return the transformation url
+  /**
+   * Upload image from a TiBlob object and return the transformation url
+   *
+   * @param blob {Object} - TiBlob object of the image to be uploaded/transformed
+   * @param transformParams {String} - List of supported query string parameters for performing
+   * transforms on the image uploaded - read more on supported parameters at
+   * http://cloudinary.com/documentation/image_transformations
+   * @param callback {Function} - Optional callback function, called with an argument object with the
+   * response `public_id` and transform url to call the Cloudinary API with to perform the transformation
+   */
   uploadAndTransform: function(blob, transformParams, callback) {
     var nowUnix = moment().unix();
     var signature = Ti.Utils.sha1('timestamp=' + nowUnix + apiSecret);
@@ -57,8 +66,12 @@ exports = {
     client.send(params);
   },
 
-  // Delete uploaded image
-  deleteImage: function(public_id, callback) {
+  /**
+   * Delete uploaded image
+   *
+   * @param public_id {String} - `public_id` of the image to be deleted
+   */
+  deleteImage: function(public_id) {
     var url = apiBaseUrl + cloudName + '/resources/image/upload?public_ids[]=' + public_id;
     var client = Ti.Network.createHTTPClient({
       onload: function(e) {
