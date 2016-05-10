@@ -1,3 +1,7 @@
+/**
+ * This project is a commonJS module, offered for repeatable use in Appcelerator Titanium projects
+ * and was based on the following idea: https://gist.github.com/yozef/5841069. Many thanks Joseph!
+ */
 var moment = require('alloy/moment');
 // Cloudinary credentials - **Replace these with your creds!!!
 var cloudName = 'Your_Cloud_Name';
