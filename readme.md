@@ -1,4 +1,4 @@
-### TiCloudinary Read Me
+### TiCloudinary
 
 The easiest way to get started using Cloudinary to upload, transform, and remove stored images via the Cloudinary API! Obviously you must signup for a Cloudinary account (no worries, they have a free plan). So once you have your Cloudinary API credentials, replace the dummy credentials with yours in Ti.Cloudinary.js
 
